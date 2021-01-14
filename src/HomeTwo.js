@@ -5,11 +5,11 @@ import User from './User';
 const HomeTwo=()=>{
     const [states,setState]=useState([]);
     const [search,setSearch]=useState("");
-    const [country,setCountry]=useState([]);
-    const [pick,setPicker]=useState([]);
-    const [status,setStatus]=useState('Country');
+    const [setCountry]=useState([]);
+    const [setPicker]=useState([]);
+    const [status]=useState('Country');
     const [gender,setGender]=useState('All');
-    const [didMount, setDidMount] = useState(false);
+    const [setDidMount] = useState(false);
 
     useEffect(() => {
         setDidMount(true);

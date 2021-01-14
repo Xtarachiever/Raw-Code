@@ -1,11 +1,9 @@
-import React,{useEffect,useState,useMemo} from 'react';
+import React,{useEffect,useState} from 'react';
 import './App.css';
 import Details from './Details';
-import Each from './Each';
 import Pagination from './Pagination';
 import {Link} from 'react-router-dom';
 import User from './User';
-import Downloader from './downloader';
 
 const Home=()=>{
     const [states,setState]=useState([]);
@@ -16,7 +14,7 @@ const Home=()=>{
     const [gender,setGender]=useState('All');
     const [currentPage,setCurrentPage]=useState(1);
     const [postsPerPage]=useState(3);
-    const [isCountry]=useState(true)
+    
     useEffect(()=>{
         fetchDatas();
         getCountries();
