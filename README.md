@@ -1,7 +1,13 @@
 # Decagon
 WELCOME
 
+<<<<<<< HEAD
 Thank you for checking out this task by Decagon
+=======
+[link](http://xtarachiever.github.io/Raw-Code)
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+>>>>>>> 566b845c4269cc71dc7d42b7d0eeae15881e1baf
 
 ### Link to live server
 [Decagon](https://xtarachiever.github.io/Decagon/index.html)
