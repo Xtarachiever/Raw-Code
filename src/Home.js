@@ -1,8 +1,11 @@
-import React,{useEffect,useState} from 'react';
+import React,{useEffect,useState,useMemo} from 'react';
 import './App.css';
 import Details from './Details';
+import Each from './Each';
 import Pagination from './Pagination';
+import {Link} from 'react-router-dom';
 import User from './User';
+import Downloader from './downloader';
 
 const Home=()=>{
     const [states,setState]=useState([]);
@@ -13,11 +16,17 @@ const Home=()=>{
     const [gender,setGender]=useState('All');
     const [currentPage,setCurrentPage]=useState(1);
     const [postsPerPage]=useState(3);
+    const [isCountry]=useState(true)
     useEffect(()=>{
         fetchDatas();
         getCountries();
         picker();
       },[status,gender]);
+
+    
+    // const anotherOne=useMemo(()=>(
+    //     pick.slice(indexOfFirstPage,indexOfLastPage)
+    //     ),[pick])
     const fetchDatas=async ()=>{
         try{
           const response=await fetch('https://randomuser.me/api/?results=20');
@@ -33,7 +42,8 @@ const Home=()=>{
     const indexOfLastPage=currentPage*postsPerPage;
     const indexOfFirstPage=indexOfLastPage-postsPerPage;
     const currentPosts=country.slice(indexOfFirstPage,indexOfLastPage);
-    const filterSearch=country.filter((state)=>((state.name.first.toLowerCase()).includes(search.toLowerCase())||(state.gender.toLowerCase().includes(search.toLowerCase()))))
+    const currentPick=pick.slice(indexOfFirstPage,indexOfLastPage);
+    const filterSearch=states.filter((state)=>((state.name.first.toLowerCase()).includes(search.toLowerCase())||(state.gender.toLowerCase().includes(search.toLowerCase()))))
 
     //setSearch values
     const getSearch=(e)=>{
@@ -45,12 +55,15 @@ const Home=()=>{
     }
     const getGender=(e)=>{
         setGender(e.target.value);
+        setCountry(currentPick);
     }
+
     //get the countries available
     const countries=states.map(location=>location.location.country)
     const uniqueCountries=Array.from(new Set(countries)).sort();
     const getCountries=()=>{
         setSearch("");
+        setPicker("");
         switch(status){
             case 'Australia':
                 setCountry(states.filter(state=>state.location.country==='Australia'));
@@ -67,6 +80,39 @@ const Home=()=>{
             case 'Finland':
                 setCountry(states.filter(state=>state.location.country==='Finland'));
                 break;
+            case 'France':
+                setCountry(states.filter(state=>state.location.country==='France'));
+                break;
+            case 'Germany':
+                setCountry(states.filter(state=>state.location.country==='Germany'));
+                break;
+            case 'Denmark':
+                setCountry(states.filter(state=>state.location.country==='Denmark'));
+                break;
+            case 'Spain':
+                setCountry(states.filter(state=>state.location.country==='Spain'));
+                break;
+            case 'United Kingdom':
+                setCountry(states.filter(state=>state.location.country==='United Kingdom'));
+                break;
+            case 'Iran':
+                setCountry(states.filter(state=>state.location.country==='Iran'));
+                break;
+            case 'Norway':
+                setCountry(states.filter(state=>state.location.country==='Norway'));
+                break;
+            case 'Netherlands':
+                setCountry(states.filter(state=>state.location.country==='Netherlands'));
+                break;
+            case 'New Zealand':
+                setCountry(states.filter(state=>state.location.country==='New Zealand'));
+                break;
+            case 'Turkey':
+                setCountry(states.filter(state=>state.location.country==='Turkey'));
+                break;
+            case 'United States':
+                setCountry(states.filter(state=>state.location.country==='United States'));
+                break;
             default:
                 setCountry(states);
                 break;
@@ -74,6 +120,7 @@ const Home=()=>{
     }
     //Change pageNumbers
     const paginate=(pageNumber)=>setCurrentPage(pageNumber);
+
 
     //Change Picker
     const picker=()=>{
@@ -89,8 +136,16 @@ const Home=()=>{
                 break;
         }
     }
+    // const isCountryPicker=isCountry;
+    // let isPicker;
+    // if(isCountryPicker){
+    //     isPicker=currentPosts;
+    // }
+    // else{
+    //     isPicker=currentPick;
+    // }
     return(
-        <div className="contents">
+        <div className="contents" data-testid="home">
             <div className="contents-one">
                 <p className="header">Hello,<span> Emerald</span></p> 
                 <p>Welcome to your dashboard, kindly sort through the user base</p>
@@ -99,21 +154,8 @@ const Home=()=>{
                     <input type="text" placeholder="Find a user" value={search} onChange={getSearch}/>
                 </div>
                 <p className="user-header">Show Users</p>
-                <div className="categories">
-                    <div className="icons">
-                        <div className="icon user">
-                            <i className="fa fa-users"></i>
-                        </div>
-                        <div className="icon female">
-                            <i className="fa fa-female"></i>
-                        </div>
-                        <div className="icon male">
-                            <i className="fa fa-male"></i>
-                        </div>
-                    </div>
-                    <div className="user-gender">
-                        <User states={states} picker={picker} getGender={getGender}/>
-                    </div>
+                <div className="user-gender">
+                    <User states={states} getGender={getGender}/>
                 </div>
             </div>
             <div className="content-two">
@@ -129,7 +171,7 @@ const Home=()=>{
                             {
                                 uniqueCountries.map(unique=>{
                                     if(unique===""){
-                                        return(<option value="Not Set">Not Set</option>)
+                                        return(<option value="Not Set" key="Not Set">Not Set</option>)
                                     }
                                     else{
                                         return(<option value={unique} key={unique}>{unique}</option>)
@@ -140,14 +182,20 @@ const Home=()=>{
                     </div>
                 </div>
                 <div className="info">
-                    {currentPosts.map(state=>(
-                        <Details name={state.name.first} key={state.name.first} picture={state.picture.medium}
-                        street={state.location.street.number} city={state.location.street.name}
-                        country={state.location.country} email={state.email} phone={state.cell}/>
-                    ))}
+                        {currentPosts.map(state=>(
+                            <Link to={`/${state.name.first}`} style={{textDecoration:'none'}} className="linked">
+                            <Details name={state.name.first} key={state.email} picture={state.picture.medium}
+                            street={state.location.street.number} city={state.location.street.name}
+                            country={state.location.country} email={state.email} phone={state.cell}/>
+                            </Link>
+                        ))}
                 </div>
-                <Pagination totalPosts={states.length} postsPerPage={postsPerPage} paginate={paginate}/>
-                <User states={states} picker={picker} getGender={getGender}/>
+                <div className="next">
+                    <Link to='/:name/downloader'>
+                        <button><i className="fa fa-cloud-download"></i>Download Results</button>
+                    </Link>
+                    <Pagination totalPosts={states.length} postsPerPage={postsPerPage} paginate={paginate}/>
+                </div>
             </div>
         </div>
     )
