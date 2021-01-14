@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+# Decagon
+WELCOME
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Thank you for checking out this task by Decagon
 
-## Available Scripts
+### Link to live server
+[Decagon](https://xtarachiever.github.io/Decagon/index.html)
 
-In the project directory, you can run:
+## THE CHALLENGE
+The API used was generated from Random User Generator and the [Link](https://randomuser.me/) to the full API site.
+The framework/library used is React. With react, the work is simpler and a lot of packages installed made the work faster.
 
-### `npm start`
+The features implemented in this projects are:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+-A search filter using the name of each user to filter the datas
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+-A featured dropdown select box to filter the data based on the countries
 
-### `npm test`
+-A filter feature based on the gender
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The API given generates random user datas and to reduce the number of data being fetched, I used a precise number of 20 random users
 
-### `npm run build`
+# Functional Components
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+In react, I used the Functional Components, A functional component is just a plain JavaScript function which accepts props as an argument and returns a React element. A class component requires you to extend from React. Component and create a render function which returns a React element.
+It is noticed that the Class components is more referred to the functional components but here are some reason why functional components should be used:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+ -Functional component are much easier to read and test because they are plain JavaScript functions without state or lifecycle-hooks
+ 
+ -You end up with less code
+ 
+ -They help you to use best practices. It will get easier to separate container and presentational components because you need to think more about your component’s state        
+ 
+ -if you don’t have access to setState() in your component
+ 
+ -The React team mentioned that there may be a performance boost for functional component in future React versions
+ 
+ Another feature that was implemented in this project is downloading the data
+ 
+ ## DOWNLOADING THE FILE 
+ 
+ [Full write-up](https://medium.com/javascript-in-plain-english/how-to-create-download-and-upload-files-in-react-apps-80893da4247a)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+With HTML5, some prior complications are eliminated. Eg, the download attribute of the anchor element is easily used to set the suggested filename. Here’s the pattern:
 
-### `npm run eject`
+1) The user initiates the download via a button connected to a JavaScript method.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+2) The data is converted to the output format. The result is a string.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3) A Blob is created from the string.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+4) An Object URL is created from the Blob using the URL.createObjectURL method.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+5) A hidden anchor element’s href attribute is set to the Object URL.
 
-## Learn More
+6) The anchor element’s click method is invoked. Normally the click method is invoked when the user clicks on the element. In this case, we programmatically click the element so the user only needs to initiate the download in step 1.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+7) After the click method completes, the Object URL can be freed.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The download format was set to be CSV, to download in this format, the following steps must be taken:
+For CSV, multiple [JavaScript generator implementations](https://stackoverflow.com/questions/14964035/how-to-export-javascript-array-info-to-csv-on-client-side) are available. XML is not hard to create either. But if you store it in the DOM, remember that you’ll need to convert the structure to a string before it can be written to a file.
