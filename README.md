@@ -4,7 +4,7 @@ WELCOME
 Thank you for checking out this task by Decagon
 
 ### Link to live server
-[Decagon](https://xtarachiever.github.io/Decagon/index.html)
+[Decagon](https://xtarachiever.github.io/Raw-Code/index.html)
 
 ## THE CHALLENGE
 The API used was generated from Random User Generator and the [Link](https://randomuser.me/) to the full API site.
